@@ -1,0 +1,73 @@
+
+<div class="alert alert-success alert-dismissible" role="alert" ng-show="addSuccess">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+    <strong>Success!</strong> Success adding a new product
+</div>
+<div class="alert alert-success alert-dismissible" role="alert" ng-show="editSuccess">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+    <strong>Success!</strong> Success edit the product
+</div>
+<div class="alert alert-success alert-dismissible" role="alert" ng-show="deleteSucess">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+    <strong>Success!</strong> Success delete the product
+</div>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Products</div>
+    <div class="panel-body">
+        <div class="col-lg-4" >
+        </div>
+        <div class="col-lg-6" >
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="name..." ng-model="name"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="searchProduct(name)">Search</button>
+                </span>
+            </div>
+            <!-- /input-group -->
+        </div>
+        <!-- /.col-lg-6 -->
+    </div>
+
+    <!-- Table -->
+    <table class="table table-hover">
+        <tr>
+            <th>#</th>
+            <th translate>listProduct.name </th>
+            <th translate>listProduct.description</th>
+            <th class="text-right" translate>listProduct.netPrice</th>
+            <th class="text-right" translate>listProduct.price</th>
+            <th class="text-center" translate>listProduct.picture</th>
+            <th translate>listProduct.edit</th>
+            <th translate>listProduct.delete</th>
+
+        </tr>
+        <tr ng-repeat="product in vm.products">
+            <td>{{$index+1}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td class="text-right">{{product.netPrice | number}}</td>
+            <td class="text-right">{{product.totalPrice | number}}</td>
+            <td >
+                <div ng-repeat="image in product.images" class="text-center" class="thumbnail">
+                    <img ng-src="data:{{image.contentType}};base64,{{image.content}}">
+                </div>
+            </td>
+            <td class="text-center"><a ng-href="#/editProduct/{{product.id}}"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+            <td class="text-center"><a ng-href="#/listProduct"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true" ng-click="deleteProduct(product.id)"></span></a></td>
+        </tr>
+        <tr>
+            <th></th>
+            <th><strong translate>listProduct.total</strong> </th>
+            <th></th>
+            <th class="text-right">{{totalNetPrice | number}}</th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+    </table>
+</div>

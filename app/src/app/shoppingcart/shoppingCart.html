@@ -1,0 +1,52 @@
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">ShoppingCart</div>
+    <div class="panel-body">
+        ShoppingCart Details
+    </div>
+
+    <form name="editform" novalidate>
+        <div class="form-group">
+            <!-- Table -->
+            <table class="table table-hover">
+                <tr>
+                    <th>#</th>
+                    <th translate>listProduct.name </th>
+                    <th translate>listProduct.description</th>
+                    <th class="text-right" translate>listProduct.amount</th>
+                    <th class="text-right" translate>listProduct.netPrice</th>
+                    <th class="text-right" translate>listProduct.price</th>
+
+
+
+                </tr>
+                <tr ng-repeat="selectedProduct in cart.selectedProducts">
+                    <td>{{$index+1}}</td>
+                    <td>{{selectedProduct.product.name}}</td>
+                    <td>{{selectedProduct.product.description}}</td>
+                    <td class=" col-xs-1"><input ng-model="selectedProduct.amount" class="form-control text-right" id="selectedproductamount"
+                               placeholder="amount" name="productdescription" required/></td>
+                    <td class="text-right">{{selectedProduct.product.netPrice | number:2}}</td>
+                    <td class="text-right">{{totalEach($index) |number:2}}</td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><strong translate>listProduct.total</strong> </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th class="text-right">{{total() | number :2}}</th>
+                </tr>
+            </table>
+            <div class="panel-body text-center">
+                <a href ng:click="updateCart()" class="btn btn-primary ">update cart</a>
+            </div>
+        </div>
+    </form>
+    <div class="alert alert-success alert-dismissible" role="alert" ng-show="cartUpdateSuccess">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        <strong>Success!</strong> Success edit the product
+    </div>
+</div>
